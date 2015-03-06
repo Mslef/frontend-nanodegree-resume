@@ -1,13 +1,10 @@
 /*
-The resume includes an interactive map. To add it, append the googleMap string to <div id=”mapDiv”>.
-
-
 Your resume should also console.log() information about click locations. On line 90 in helper.js, you’ll 
 find a jQuery onclick handler that you’ll need to modify to work with the logClicks(x,y) function above it.
 
-
 It’s possible to make additional information show up when you click on the pins in the map. 
 Check out line 174 in helper.js and the Google Maps API to get started.
+
 
 Additionnal interactivity (menu navigation, polymer components) 
 
@@ -170,8 +167,6 @@ var education = {
 		}
 	}
 }
-
-
 
 
 bio.display();
