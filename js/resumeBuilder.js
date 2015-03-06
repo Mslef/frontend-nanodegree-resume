@@ -1,3 +1,20 @@
+/*
+The resume includes an interactive map. To add it, append the googleMap string to <div id=”mapDiv”>.
+
+
+Your resume should also console.log() information about click locations. On line 90 in helper.js, you’ll 
+find a jQuery onclick handler that you’ll need to modify to work with the logClicks(x,y) function above it.
+
+
+It’s possible to make additional information show up when you click on the pins in the map. 
+Check out line 174 in helper.js and the Google Maps API to get started.
+
+Additionnal interactivity (menu navigation, polymer components) 
+
+Add custom CSS => CSS de page portfolio perso
+
+*/
+
 var bio  = {
 	"name" : "Marcel Lefebvre",
 	"role" : "Front End Web Developer",
@@ -34,7 +51,6 @@ var bio  = {
 	}
 }
 
-
 var work = {
 	"jobs" : [{
 		"employer": "Self Employed",
@@ -52,8 +68,7 @@ var work = {
 		"location": "Montreal",
 		"dates": "15-10-2013  -- 04-03-2015",
 		"description": "Sales to Mixed Martial Arts and boxing clubs"
-	}
-	],  display :function () {
+	}],  display :function () {
 		for (job in this.jobs) {
 			$('#workExperience').append(HTMLworkStart);
 			$('.work-entry:last').append(HTMLworkEmployer.replace('%data%', this.jobs[job].employer));
@@ -66,132 +81,105 @@ var work = {
 
 }
 
+var projects = {
+	"projects": [{
+		"title": "Meme editor", 
+		"dates": "string (works with a hyphen between them)",
+		"description": "Cool little meme creator tool",
+		"images": ["http://upload.wikimedia.org/wikipedia/commons/2/22/Turkish_Van_Cat.jpg", "http://cdn.playbuzz.com/cdn/092bf6c5-3b6e-4001-8709-154e8a2640c7/82fab410-2978-44b0-bdc5-33dc4fd1118a.jpg"]
+	},{"title": "Personal GitHub Page" ,
+		"dates": "string (works with a hyphen between them)",
+		"description": "Personnal portfolio page on GihHub Pages",
+		"images": []
+	}], display :function () {
+		for (project in this.projects) {
+			$('#projects').append(HTMLprojectStart);
+			$('.project-entry:last').append(HTMLprojectTitle.replace('%data%', this.projects[project].title));
+			$('.project-entry:last').append(HTMLprojectDates.replace('%data%', this.projects[project].dates));
+			$('.project-entry:last').append(HTMLprojectDescription.replace('%data%', this.projects[project].description));
+			for(image in this.projects[project].images)	{
+				$('.project-entry:last').append(HTMLprojectImage.replace('%data%', this.projects[project].images[image]));
+			}
+		}
+	}
+}
+
+var education = {
+	"schools": [{			
+			"name": "Université de Montréal",
+			"location": "Montreal",
+			"degree": "Bachelor",
+			"majors": ["History", "East-Asian Studies"],
+			"dates": 14052010,
+			"url": "http://www.umontreal.ca"
+		}, {			
+			"name": "Université de Montréal",
+			"location": "Montreal",
+			"degree": "Masters",
+			"majors": ["International Studies"],
+			"dates": 14052012,
+			"url": "http://www.umontreal.ca"
+		}, {
+			"name": "Polytechnique Montreal",
+			"location": "Montreal",
+			"degree": "Bachelor",
+			"majors": ["Software Engineering"],
+			"dates": 14032013,
+			"url": "http://www.polymtl.ca"
+		}
+	], "onlineCourses": [{
+			"title": "Front End Web Design Nanodegree",
+			"school": "Udacity",
+			"date": 15042015,
+			"url": "https://www.udacity.com/course/nd001"
+		}, {
+			"title": "Intro to Computer Science",
+			"school": "Udacity",
+			"date": 19082012,
+			"url": "https://www.udacity.com/course/cs101"
+		}, {
+			"title": "Intro to the Design of Everyday Things",
+			"school": "Udacity",
+			"date": 19042014,
+			"url": "https://www.udacity.com/course/design101"
+		}, {
+			"title": "How to Build a Startup",
+			"school": "Udacity",
+			"date": 21042014,
+			"url": "https://www.udacity.com/course/ep245"
+		}], display :function () {
+			for (school in this.schools) {
+				$('#education').append(HTMLschoolStart);
+				$('.education-entry:last').append(HTMLschoolName.replace('%data%', this.schools[school].name));
+				$('.education-entry:last').append(HTMLschoolDegree.replace('%data%', this.schools[school].degree));
+				$('.education-entry:last').append(HTMLschoolDates.replace('%data%', this.schools[school].dates));
+				$('.education-entry:last').append(HTMLschoolLocation.replace('%data%', this.schools[school].location));
+				for(major in this.schools[school].majors)	
+					$('.education-entry:last').append(HTMLschoolMajor.replace('%data%', this.schools[school].majors[major]))
+			};
+
+			$('#education').append(HTMLonlineClasses);	
+
+			for (course in this.onlineCourses) {
+				$('#education').append(HTMLschoolStart);
+				$('.education-entry:last').append(HTMLonlineTitle.replace('%data%', this.onlineCourses[course].title));
+				$('.education-entry:last').append(HTMLonlineSchool.replace('%data%', this.onlineCourses[course].school));
+				$('.education-entry:last').append(HTMLonlineDates.replace('%data%', this.onlineCourses[course].date));
+				$('.education-entry:last').append(HTMLonlineURL.replace('%data%', this.onlineCourses[course].url));
+
+		}
+	}
+}
+
+
+
 
 bio.display();
 work.display();
+projects.display();
+education.display();
 
-$(".mapDiv").append(googleMap);
+$("#mapDiv").append(googleMap);
 
-/*
-var HTMLprojectStart = '<div class="project-entry"></div>';
-var HTMLprojectTitle = '<a href="#">%data%</a>';
-var HTMLprojectDates = '<div class="date-text">%data%</div>';
-var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
-
-var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%';
-var HTMLschoolDegree = ' -- %data%</a>';
-var HTMLschoolDates = '<div class="date-text">%data%</div>';
-var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
-
-$('#header').append(HTMLschoolName.replace('%data%', education.schoolName));
-$('#header').append(HTMLschoolDegree.replace('%data%', education.schoolDegree));
-$('#header').append(HTMLschoolDates.replace('%data%', education.schoolDates));
-$('#header').append(HTMLschoolLocation.replace('%data%', education.schoolLocation));
-$('#header').append(HTMLschoolMajor.replace('%data%', education.schoolMajor));
-
-
-
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
-var HTMLonlineTitle = '<a href="#">%data%';
-var HTMLonlineSchool = ' - %data%</a>';
-var HTMLonlineDates = '<div class="date-text">%data%</div>';
-var HTMLonlineURL = '<br><a href="#">%data%</a>';
-
-
-var HTMLworkStart = '<div class="work-entry"></div>';
-
-
-
-var education = {
-	"schools": [
-		"UdemBac" :{			
-			"name": "Université de Montréal"
-			"location": "Montreal"
-			"degree": "Bachelor"
-			"majors": ["History", "East-Asian Studies"]
-			"dates": 14052010
-			"url": "http://www.umontreal.ca"
-		}, "UdemMaster" :{			
-			"name": "Université de Montréal"
-			"location": "Montreal"
-			"degree": "Masters"
-			"majors": ["International Studies"]
-			"dates": 14052012
-			"url": "http://www.umontreal.ca"
-		}, "Poly" : {
-			"name": "Polytechnique Montreal"
-			"location": "Montreal"
-			"degree": "Bachelor"
-			"majors": ["Software Engineering"]
-			"dates": 14032013
-			"url": "http://www.polymtl.ca"
-		}
-	]
-	"onlineCourses": [
-		"NanoUda":{
-			"title": "Front End Web Design Nanodegree"
-			"school": "Udacity"
-			"date": integer (date finished)
-			"url": string
-		}, "IntroCS":{
-			"title": "Intro to Computer Science"
-			"school": "Udacity"
-			"date": integer (date finished)
-			"url": string
-		}, "Design":{
-			"title": string
-			"school": "Udacity"
-			"date": integer (date finished)
-			"url": string
-		}, "Startup":{
-			"title": string
-			"school": "Udacity"
-			"date": integer (date finished)
-			"url": string
-		}]
-	//display: function
-}
-
-
-
-
-
-var projects = [: array of objects with
-      title: string 
-      dates: string (works with a hyphen between them)
-      description: string
-      images: array with string urls
-display: function
-
-/*
-
-
-The resume includes an interactive map. To add it, append the googleMap string to <div id=”mapDiv”>.
-
-
-Your resume should also console.log() information about click locations. On line 90 in helper.js, you’ll 
-find a jQuery onclick handler that you’ll need to modify to work with the logClicks(x,y) function above it.
-
-
-It’s possible to make additional information show up when you click on the pins in the map. 
-Check out line 174 in helper.js and the Google Maps API to get started.
-
-Additionnal interactivity (menu navigation, polymer components) 
-
-Add custom CSS => CSS de page portfolio perso
-
-*/
-
-
-
-/*
-for (var item in bio) {
-	console.log (('HTML' + item).replace('%data%', bio[item]));
-	$('#header').append(('HTML' + item).replace('%data%', bio[item]));
-}
-*/
 
 
