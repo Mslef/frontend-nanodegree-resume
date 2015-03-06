@@ -1,7 +1,7 @@
 * {
   padding:0;
   margin:0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .clearfix {
@@ -15,7 +15,7 @@
 
 h1 {
   font-size: 40px;
-  color: #F5A623;
+  color: #610000;
   line-height: 48px;
   display: inline;
 }
@@ -87,7 +87,7 @@ a {
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  color: #FBDDA3;
   display: none;
 }
 
@@ -96,12 +96,12 @@ a {
 }
 
 .orange-text {
-  color: #F5AE23;
+  color: #FBDDA3;
 }
 
 .white-text {
   font-weight: bold;
-  color: #FFFFFF;
+  color: black;
 }
 
 .gray {
@@ -116,7 +116,7 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: #CF7C00;
 }
 
 .flex-box {
@@ -139,17 +139,20 @@ ul {
   list-style-type: none;
 }
 
+
 .biopic {
   float: left;
-  padding: 10px;
   width: 200px;
   display: none;
+  border:black solid 1px ;
 }
 
 img {
-  padding: 10px;
+  margin-right: 30px;
+  padding: none;
   max-width: 400px;
   max-height: 400px;
+
 }
 
 /* Bar chart stuff */

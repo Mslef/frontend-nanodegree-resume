@@ -43,7 +43,7 @@ var bio  = {
 
 		$('#header').append(HTMLskillsStart);
 		for (skill in this.skills){
-			$('#header').append(HTMLskills.replace("%data%",this.skills[skill]));
+			$('#skills').append(HTMLskills.replace("%data%",this.skills[skill]));
 		}
 	}
 }
@@ -83,7 +83,7 @@ var projects = {
 		"title": "Meme editor", 
 		"dates": "string (works with a hyphen between them)",
 		"description": "Cool little meme creator tool",
-		"images": ["http://upload.wikimedia.org/wikipedia/commons/2/22/Turkish_Van_Cat.jpg", "http://cdn.playbuzz.com/cdn/092bf6c5-3b6e-4001-8709-154e8a2640c7/82fab410-2978-44b0-bdc5-33dc4fd1118a.jpg"]
+		"images": ["images/cutePuppy.jpg", "images/uglyCat.jpg"]
 	},{"title": "Personal GitHub Page" ,
 		"dates": "string (works with a hyphen between them)",
 		"description": "Personnal portfolio page on GihHub Pages",
@@ -147,7 +147,9 @@ var education = {
 		}], display :function () {
 			for (school in this.schools) {
 				$('#education').append(HTMLschoolStart);
-				$('.education-entry:last').append(HTMLschoolName.replace('%data%', this.schools[school].name));
+				var newName = HTMLschoolName.replace('%data%', this.schools[school].name);	
+				$('.education-entry:last').append(newName.replace('#', this.schools[school].url));
+
 				$('.education-entry:last').append(HTMLschoolDegree.replace('%data%', this.schools[school].degree));
 				$('.education-entry:last').append(HTMLschoolDates.replace('%data%', this.schools[school].dates));
 				$('.education-entry:last').append(HTMLschoolLocation.replace('%data%', this.schools[school].location));
@@ -162,7 +164,8 @@ var education = {
 				$('.education-entry:last').append(HTMLonlineTitle.replace('%data%', this.onlineCourses[course].title));
 				$('.education-entry:last').append(HTMLonlineSchool.replace('%data%', this.onlineCourses[course].school));
 				$('.education-entry:last').append(HTMLonlineDates.replace('%data%', this.onlineCourses[course].date));
-				$('.education-entry:last').append(HTMLonlineURL.replace('%data%', this.onlineCourses[course].url));
+				var newUrl = HTMLonlineURL.replace('%data%', this.onlineCourses[course].url)
+				$('.education-entry:last').append(newUrl.replace('#', this.onlineCourses[course].url));
 
 		}
 	}
